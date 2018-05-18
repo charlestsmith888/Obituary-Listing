@@ -134,4 +134,26 @@ get_header(); ?>
 		</div>
 	</div>
 <?php endwhile; ?>
-<?php get_footer();
+<?php get_footer(); ?>
+
+<script>
+	jQuery(document).on('submit', '.OBT_sharedby', function(event) {
+		event.preventDefault();
+		var t = jQuery(this);
+		var formData = new FormData(jQuery(this)[0]);
+		jQuery.ajax({
+			type: 'post',
+			url: obt_ajaxurl.ajax_url,
+			contentType: false,
+			processData: false,
+			data: formData,
+		})
+		.done(function(value) {
+			t.trigger('reset');
+			alert('Thankyou for sharing...');
+		})
+		.fail(function() {
+			alert('Something Went Wrong');
+		});
+	});
+</script>
